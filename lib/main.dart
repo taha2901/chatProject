@@ -13,13 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      // themeMode: ThemeMode.dark, // مش هتعمل حاجه
-      // darkTheme: ThemeData.dark(), // اسلوب غلط عشان  ال كالوار ثيم مش هيشتغل
-      themeMode: ThemeMode.system, // كدا صح الصح 
+      themeMode: ThemeMode.system,
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.lime, brightness: Brightness.dark),
-      ), // كدا صح
+      ),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lime),
         useMaterial3: true,

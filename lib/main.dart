@@ -1,3 +1,4 @@
+import 'package:chat/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,14 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lime),
         useMaterial3: true,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Chat'),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-        ),
-      ),
+      home: const LoginScreen(),
     );
   }
 }

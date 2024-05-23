@@ -1,3 +1,6 @@
+import 'package:chat/layout.dart';
+import 'package:chat/screens/auth/forget_screen.dart';
+import 'package:chat/screens/auth/setup_profile.dart';
 import 'package:chat/utils/colors.dart';
 import 'package:chat/widgets/logo.dart';
 import 'package:chat/widgets/text_field.dart';
@@ -61,11 +64,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       GestureDetector(
                         child: const Text("Forget Password?"),
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => ForgetScreen(),
-                          //     ));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ForgetScreen(),
+                              ));
                         },
                       )
                     ],
@@ -74,7 +77,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 16,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        print('Done');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const Layout();
+                            },
+                          ),
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
@@ -98,18 +113,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.all(16),
                     ),
                     onPressed: () {
-                      // Navigator.pushAndRemoveUntil(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => SetupProfile(),
-                      //     ),
-                      //     (route) => false);
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SetupProfileScreen(),
+                          ),
+                          (route) => false);
                     },
                     child: Center(
                       child: Text(
                         "Create Account".toUpperCase(),
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.onBackground,  // onBackground not background
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onBackground, // onBackground not background
                         ),
                       ),
                     ),

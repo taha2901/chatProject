@@ -1,3 +1,4 @@
+import 'package:chat/layout.dart';
 import 'package:chat/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,13 +18,13 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.lime, brightness: Brightness.dark),
+            seedColor: Colors.red, brightness: Brightness.dark),
       ),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lime),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const Layout(),
     );
   }
 }

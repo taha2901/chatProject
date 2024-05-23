@@ -1,3 +1,5 @@
+import 'package:chat/screens/chat/chat_screen.dart';
+import 'package:chat/screens/chat/widgets/chat_card.dart';
 import 'package:chat/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -28,19 +30,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return const Card(
-                      child: ListTile(
-                        leading: CircleAvatar(),
-                        title: Text("Name"),
-                        subtitle: Text("Last Message"),
-                        trailing: Badge(
-                          // backgroundColor: kPrimaryColor ,
-                          padding: EdgeInsets.symmetric(horizontal: 12),
-                          label: Text("3"),
-                          largeSize: 30,
-                        ),
-                      ),
-                    );
+                    return const ChatCard();
                   }),
             )
           ],

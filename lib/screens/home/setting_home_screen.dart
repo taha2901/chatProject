@@ -1,3 +1,5 @@
+import 'package:chat/screens/settings/profile.dart';
+import 'package:chat/screens/settings/qr_code.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -28,11 +30,11 @@ class _SettingHomeScreenState extends State<SettingHomeScreen> {
               title: Text("Name"),
               trailing: IconButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => QrCodeScreen(),
-                    //     ));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => QrCodeScreen(),
+                        ));
                   },
                   icon: Icon(Iconsax.scan_barcode)),
             ),
@@ -41,11 +43,11 @@ class _SettingHomeScreenState extends State<SettingHomeScreen> {
                 title: Text("Profile"),
                 leading: Icon(Iconsax.user),
                 trailing: Icon(Iconsax.arrow_right_3),
-                // onTap: () => Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => ProfileScreen(),
-                //     )),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileScreen(),
+                    )),
               ),
             ),
             Card(

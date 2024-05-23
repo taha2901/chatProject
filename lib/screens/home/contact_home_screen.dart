@@ -41,7 +41,7 @@ class _ContactHomeScreenState extends State<ContactHomeScreen> {
                 children: [
                   Expanded(
                       child: TextField(
-                    autofocus: true,
+                    autofocus: true, // open keyboard automatic 
                     controller: searchCon,
                     decoration: InputDecoration(
                       hintText: "Search by name",

@@ -30,7 +30,7 @@ class _LayoutState extends State<Layout> {
           ChatHomeScreen(),
           GroupHomeScreen(),
           ContactHomeScreen(),
-          SettingsHomeScreen(),
+          SettingHomeScreen(),
         ],
       ),
       bottomNavigationBar: NavigationBar(

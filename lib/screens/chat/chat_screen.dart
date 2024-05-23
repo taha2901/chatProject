@@ -1,4 +1,5 @@
 import 'package:chat/screens/chat/widgets/chat_message_card.dart';
+import 'package:chat/screens/chat/widgets/field_msg_card.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -76,44 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
             //     ),
             //   ),
             // ),
-            Row(
-              children: [
-                Expanded(
-                  child: Card(
-                    child: TextField(
-                      maxLines: 5,
-                      minLines: 1,
-                      decoration: InputDecoration(
-                        suffixIcon: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Iconsax.emoji_happy),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Iconsax.camera),
-                            ),
-                          ],
-                        ),
-                        border: InputBorder.none,
-                        hintText: "Message",
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 10,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                IconButton.filled(
-                  onPressed: () {},
-                  icon: const Icon(Iconsax.send_1),
-                ),
-              ],
-            ),
+            const FieldMsgCard(),
           ],
         ),
       ),

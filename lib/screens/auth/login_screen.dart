@@ -17,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     TextEditingController emailCon = TextEditingController();
     TextEditingController passCon = TextEditingController();
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -25,7 +26,9 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Logo(),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Text(
               'Welcome Back',
               style: Theme.of(context).textTheme.headlineLarge,
@@ -34,23 +37,85 @@ class _LoginScreenState extends State<LoginScreen> {
               'New Material Chat App With Taha',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            Column(
-              children: [
-                CustomField(
-                      controller: emailCon,
-                      lable: "Email",
-                      icon: Iconsax.direct,
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  CustomField(
+                    controller: emailCon,
+                    lable: "Email",
+                    icon: Iconsax.direct,
+                  ),
+                  CustomField(
+                    controller: passCon,
+                    lable: "Password",
+                    icon: Iconsax.password_check,
+                    isPass: true,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      const Spacer(),
+                      GestureDetector(
+                        child: const Text("Forget Password?"),
+                        onTap: () {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => ForgetScreen(),
+                          //     ));
+                        },
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      backgroundColor: kPrimaryColor,
+                      padding: const EdgeInsets.all(16),
                     ),
-                    CustomField(
-                      controller: passCon,
-                      lable: "Password",
-                      icon: Iconsax.password_check,
-                      isPass: true,
+                    child: Center(
+                      child: Text(
+                        "Login".toUpperCase(),
+                        style: const TextStyle(color: Colors.black),
+                      ),
                     ),
-                    const SizedBox(
-                      height: 16,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      padding: const EdgeInsets.all(16),
                     ),
-              ],
+                    onPressed: () {
+                      // Navigator.pushAndRemoveUntil(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => SetupProfile(),
+                      //     ),
+                      //     (route) => false);
+                    },
+                    child: Center(
+                      child: Text(
+                        "Create Account".toUpperCase(),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,  // onBackground not background
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

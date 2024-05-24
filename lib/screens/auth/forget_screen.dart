@@ -1,6 +1,8 @@
 import 'package:chat/utils/colors.dart';
 import 'package:chat/widgets/logo.dart';
+import 'package:chat/widgets/snack_bar.dart';
 import 'package:chat/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -45,15 +47,20 @@ class _ForgetScreenState extends State<ForgetScreen> {
                     lable: "Email",
                     icon: Iconsax.direct,
                   ),
-                  
                   const SizedBox(
                     height: 16,
                   ),
-                 
-                 
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
+                    onPressed: () async {
+                      await FirebaseAuth.instance
+                          .sendPasswordResetEmail(email: emailCon.text)
+                          .then((value) {
+                        Navigator.pop(context);
+                        return CustomSnackbar.show(
+                            context, 'email sent , check your email');
+                      }).onError((error, stackTrace) {
+                        return CustomSnackbar.show(context, error.toString());
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -68,10 +75,9 @@ class _ForgetScreenState extends State<ForgetScreen> {
                       ),
                     ),
                   ),
-                  
                 ],
               ),
-            ), 
+            ),
           ],
         ),
       ),

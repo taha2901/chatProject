@@ -3,10 +3,12 @@ import 'package:chat/screens/auth/forget_screen.dart';
 import 'package:chat/screens/auth/setup_profile.dart';
 import 'package:chat/utils/colors.dart';
 import 'package:chat/widgets/logo.dart';
+import 'package:chat/widgets/snack_bar.dart';
 import 'package:chat/widgets/text_field.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -77,17 +79,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 16,
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        print('Done');
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const Layout();
-                            },
-                          ),
-                        );
+                        // print('Done');
+
+                        await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: emailCon.text, password: passCon.text)
+                            .then((value) => print("Login Donne"))
+                            .onError((error, stackTrace) {
+                          return CustomSnackbar.show(context, error.toString());
+                        });
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) {
+                        //       return const Layout();
+                        //     },
+                        //   ),
+                        // );
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -112,13 +122,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(12)),
                       padding: const EdgeInsets.all(16),
                     ),
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SetupProfileScreen(),
-                          ),
-                          (route) => false);
+                    onPressed: () async {
+                      // Navigator.pushAndRemoveUntil(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const SetupProfileScreen(),
+                      //     ),
+                      //     (route) => false);
+                      await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: emailCon.text, password: passCon.text)
+                          .then((value) => print("Donne"))
+                          .onError((error, stackTrace) {
+                        return CustomSnackbar.show(context, error.toString());
+                      });
                     },
                     child: Center(
                       child: Text(

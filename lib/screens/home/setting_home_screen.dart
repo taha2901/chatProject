@@ -1,5 +1,7 @@
 import 'package:chat/screens/settings/profile.dart';
 import 'package:chat/screens/settings/qr_code.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -90,6 +92,9 @@ class _SettingHomeScreenState extends State<SettingHomeScreen> {
             ),
             Card(
               child: ListTile(
+                onTap: () async{
+                  return await FirebaseAuth.instance.signOut();
+                },
                 title: Text("Signout"),
                 trailing: Icon(Iconsax.logout_1),
               ),

@@ -86,18 +86,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         await FirebaseAuth.instance
                             .signInWithEmailAndPassword(
                                 email: emailCon.text, password: passCon.text)
-                            .then((value) => print("Login Donne"))
-                            .onError((error, stackTrace) {
+                            .then((value) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const Layout();
+                              },
+                            ),
+                          );
+                          return CustomSnackbar.show(context, 'Login is done');
+                        }).onError((error, stackTrace) {
                           return CustomSnackbar.show(context, error.toString());
                         });
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) {
-                        //       return const Layout();
-                        //     },
-                        //   ),
-                        // );
                       }
                     },
                     style: ElevatedButton.styleFrom(

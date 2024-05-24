@@ -1,4 +1,3 @@
-import 'package:chat/firebase/fire_auth.dart';
 import 'package:chat/layout.dart';
 import 'package:chat/screens/auth/forget_screen.dart';
 import 'package:chat/screens/auth/setup_profile.dart';
@@ -134,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       await FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
                               email: emailCon.text, password: passCon.text)
-                          .then((value) => FireAuth.createUser())
+                          .then((value) => debugPrint("Donne"))
                           .onError((error, stackTrace) {
                         return CustomSnackbar.show(context, error.toString());
                       });

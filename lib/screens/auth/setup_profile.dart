@@ -1,7 +1,9 @@
+import 'package:chat/firebase/fire_auth.dart';
 import 'package:chat/screens/auth/login_screen.dart';
 import 'package:chat/utils/colors.dart';
 import 'package:chat/widgets/logo.dart';
 import 'package:chat/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -15,22 +17,14 @@ class SetupProfileScreen extends StatefulWidget {
 class _SetupProfileScreenState extends State<SetupProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailCon = TextEditingController();
-    TextEditingController passCon = TextEditingController();
+    TextEditingController nameCon = TextEditingController();
     final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginScreen();
-                    },
-                  ),
-                );
+                FirebaseAuth.instance.signOut();
               },
               icon: const Icon(Iconsax.logout))
         ],
@@ -63,7 +57,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
               child: Column(
                 children: [
                   CustomField(
-                    controller: emailCon,
+                    controller: nameCon,
                     lable: "Name",
                     icon: Iconsax.user,
                   ),
@@ -71,7 +65,13 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                     height: 16,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (nameCon.text.isNotEmpty) {
+                        await FirebaseAuth.instance.currentUser!
+                            .updateDisplayName(nameCon.text)
+                            .then((value) => FireAuth.createUser());
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),

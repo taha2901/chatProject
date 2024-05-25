@@ -14,10 +14,10 @@ class FireAuth {
         id: user.uid,
         name: user.displayName ?? '',
         about: 'hello , iam using taha',
-        createdAt: DateTime.now().toString(),
+        createdAt: DateTime.now().millisecondsSinceEpoch.toString(),
         email: user.email ?? '',
         image: '',
-        lastActivated: DateTime.now().toString(),
+        lastActivated: DateTime.now().millisecondsSinceEpoch.toString(),
         online: false,
         pushToken: '');
     await firestore.collection('users').doc(user.uid).set(chatUser.toJson());

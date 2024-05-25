@@ -1,4 +1,4 @@
-class ChatUser {
+class MessageModel {
   String? id;
   String? toId;
   String? fromId;
@@ -7,7 +7,7 @@ class ChatUser {
   String? createdAt;
   String? read;
 
-  ChatUser({
+  MessageModel({
     required this.id,
     required this.fromId,
     required this.msg,
@@ -17,8 +17,8 @@ class ChatUser {
     required this.type,
   });
 
-  factory ChatUser.fromJson(Map<String, dynamic> json) {
-    return ChatUser(
+  factory MessageModel.fromJson(Map<String, dynamic> json) {
+    return MessageModel(
       id: json['id'] ?? '',
       toId: json['to_id'],
       fromId: json['from_id'],

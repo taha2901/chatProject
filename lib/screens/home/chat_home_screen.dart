@@ -1,4 +1,3 @@
-import 'package:chat/firebase/fire_auth.dart';
 import 'package:chat/firebase/fire_database.dart';
 import 'package:chat/models/room_model.dart';
 import 'package:chat/screens/chat/widgets/chat_card.dart';
@@ -104,12 +103,13 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                               b.lastMessageTime!.compareTo(a.lastMessageTime!),
                         );
                       return ListView.builder(
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (context, index) {
-                            return ChatCard(
-                              items: items[index],
-                            );
-                          });
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          return ChatCard(
+                            items: items[index],
+                          );
+                        },
+                      );
                     } else {
                       return const Center(
                         child: CircularProgressIndicator(),

@@ -1,10 +1,14 @@
+import 'package:chat/models/room_model.dart';
+import 'package:chat/models/user_model.dart';
 import 'package:chat/screens/chat/widgets/chat_message_card.dart';
 import 'package:chat/screens/chat/widgets/field_msg_card.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+  final String roomId;
+  final ChatUser chatUser;
+  const ChatScreen({super.key, required this.roomId, required this.chatUser});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -18,9 +22,9 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Nabil"),
+            Text(widget.chatUser.name!.toString()),
             Text(
-              "Last Seen 11:28 am",
+              widget.chatUser.lastActivated!.toString(),
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ],

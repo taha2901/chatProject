@@ -1,21 +1,39 @@
+import 'package:chat/firebase/fire_database.dart';
 import 'package:chat/models/msg_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:intl/intl.dart';
 
-class ChatMessageCard extends StatelessWidget {
+class ChatMessageCard extends StatefulWidget {
   final int index;
   final MessageModel messageModel;
+  final String roomId;
+  // final String msgId;
   const ChatMessageCard({
     super.key,
     required this.index,
     required this.messageModel,
+    required this.roomId,
   });
 
   @override
+  State<ChatMessageCard> createState() => _ChatMessageCardState();
+}
+
+class _ChatMessageCardState extends State<ChatMessageCard> {
+  @override
+  void initState() {
+    if (widget.messageModel.toId == FirebaseAuth.instance.currentUser!.uid) {
+      FireData().readMessage(widget.roomId, widget.messageModel.id!);
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    bool isMe = messageModel.fromId == FirebaseAuth.instance.currentUser!.uid;
+    bool isMe =
+        widget.messageModel.fromId == FirebaseAuth.instance.currentUser!.uid;
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
@@ -42,14 +60,18 @@ class ChatMessageCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(messageModel.msg.toString()),
+                  widget.messageModel.type == 'image'
+                      ? Image.network(widget.messageModel.msg.toString())
+                      : Text(widget.messageModel.msg.toString()),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       isMe
-                          ? const Icon(
+                          ? Icon(
                               Iconsax.tick_circle,
-                              color: Colors.blueAccent,
+                              color: widget.messageModel.read == ""
+                                  ? Colors.grey
+                                  : Colors.blueAccent,
                               size: 18,
                             )
                           : const SizedBox(),
@@ -59,7 +81,7 @@ class ChatMessageCard extends StatelessWidget {
                       Text(
                         DateFormat.yMMMEd() // intl
                             .format(DateTime.fromMicrosecondsSinceEpoch(
-                                int.parse(messageModel.createdAt!)))
+                                int.parse(widget.messageModel.createdAt!)))
                             .toString(),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),

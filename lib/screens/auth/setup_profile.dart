@@ -1,7 +1,5 @@
 import 'package:chat/firebase/fire_auth.dart';
-import 'package:chat/screens/auth/login_screen.dart';
 import 'package:chat/utils/colors.dart';
-import 'package:chat/widgets/logo.dart';
 import 'package:chat/widgets/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

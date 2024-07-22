@@ -1,11 +1,9 @@
 import 'package:chat/layout.dart';
 import 'package:chat/screens/auth/forget_screen.dart';
-import 'package:chat/screens/auth/setup_profile.dart';
 import 'package:chat/utils/colors.dart';
 import 'package:chat/widgets/logo.dart';
 import 'package:chat/widgets/snack_bar.dart';
 import 'package:chat/widgets/text_field.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';

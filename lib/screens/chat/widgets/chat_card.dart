@@ -41,7 +41,7 @@ class ChatCard extends StatelessWidget {
                 leading: const CircleAvatar(),
                 title: Text(chatUser.name.toString()),
                 subtitle: Text(
-                    '${items.lastMessage == "" ? chatUser.about : items.lastMessage}'),
+                    '${items.lastMessage! == "" ? chatUser.about! : items.lastMessage!}'),
                 trailing: 1 / 1 != 0
                     ? const Badge(
                         padding: EdgeInsets.symmetric(horizontal: 12),

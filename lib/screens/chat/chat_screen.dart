@@ -1,12 +1,15 @@
+import 'dart:io';
+
 import 'package:chat/firebase/fire_database.dart';
+import 'package:chat/firebase/fire_storage.dart';
 import 'package:chat/models/msg_model.dart';
-import 'package:chat/models/room_model.dart';
 import 'package:chat/models/user_model.dart';
 import 'package:chat/screens/chat/widgets/chat_message_card.dart';
 import 'package:chat/screens/chat/widgets/field_msg_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatScreen extends StatefulWidget {
   final String roomId;
@@ -20,6 +23,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController msgCon = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -38,9 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: const Icon(Iconsax.trash),
           ),
           IconButton(
-            onPressed: () {
-              
-            },
+            onPressed: () {},
             icon: const Icon(Iconsax.copy),
           ),
         ],
@@ -72,6 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 return ChatMessageCard(
                                   messageModel: messageItems[index],
                                   index: index,
+                                  roomId:  widget.roomId,
                                 );
                               },
                             )
@@ -121,6 +124,68 @@ class _ChatScreenState extends State<ChatScreen> {
               chatUser: widget.chatUser,
               roomId: widget.roomId,
             ),
+
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: Card(
+            //         child: TextField(
+            //           controller: msgCon,
+            //           maxLines: 5,
+            //           minLines: 1,
+            //           decoration: InputDecoration(
+            //             suffixIcon: Row(
+            //               mainAxisAlignment: MainAxisAlignment.end,
+            //               mainAxisSize: MainAxisSize.min,
+            //               children: [
+            //                 IconButton(
+            //                   onPressed: () {},
+            //                   icon: const Icon(Iconsax.emoji_happy),
+            //                 ),
+            //                 IconButton(
+            //                   onPressed: () async {
+            //                     ImagePicker picker = ImagePicker();
+            //                     XFile? image = await picker.pickImage(
+            //                         source: ImageSource.gallery);
+
+            //                     if (image != null) {
+            //                       FireStorage().sendImage(
+            //                           file: File(image.path),
+            //                           roomId: widget.roomId,
+            //                           uid: widget.chatUser.id!);
+            //                     }
+            //                   },
+            //                   icon: const Icon(Iconsax.camera),
+            //                 ),
+            //               ],
+            //             ),
+            //             border: InputBorder.none,
+            //             hintText: "Message",
+            //             contentPadding: const EdgeInsets.symmetric(
+            //               horizontal: 16,
+            //               vertical: 10,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     IconButton.filled(
+            //       onPressed: () {
+            //         if (msgCon.text.isNotEmpty) {
+            //           FireData()
+            //               .sendMessage(
+            //                   widget.chatUser.id!, msgCon.text, widget.roomId)
+            //               .then((value) {
+            //             setState(() {
+            //               msgCon.text = "";
+            //             });
+            //           });
+            //         }
+            //       },
+            //       icon: const Icon(Iconsax.send_1),
+            //     ),
+            //   ],
+            // )
           ],
         ),
       ),

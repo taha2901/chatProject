@@ -16,7 +16,7 @@ class FireAuth {
         about: 'hello , iam using taha',
         createdAt: DateTime.now().millisecondsSinceEpoch.toString(),
         email: user.email ?? '',
-        image: '',
+        image: '', //user.photoURL ?? '',
         lastActivated: DateTime.now().millisecondsSinceEpoch.toString(),
         online: false,
         pushToken: '');

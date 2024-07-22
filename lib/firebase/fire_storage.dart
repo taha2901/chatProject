@@ -23,6 +23,7 @@
 
 
 import 'dart:io';
+import 'package:chat/firebase/fire_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,7 @@ class FireStorage {
 
       // Get the download URL
       String imageUrl = await ref.getDownloadURL();
+      FireData().sendMessage(uid, imageUrl , roomId , type: 'image');
       debugPrint('Image URL: $imageUrl');
       return imageUrl;
     } catch (e) {

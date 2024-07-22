@@ -39,8 +39,8 @@ class FireData {
     }
   }
 
-  Future sendMessage(
-      String uid, String message, String roomId, {String? type}) async {
+  Future sendMessage(String uid, String message, String roomId,
+      {String? type}) async {
     String msgId = const Uuid().v1();
     MessageModel msg = MessageModel(
         id: msgId,
@@ -56,5 +56,17 @@ class FireData {
         .collection('messages')
         .doc(msgId)
         .set(msg.toJson());
+
+  firestore
+        .collection('rooms').doc(roomId).update({'last_message':type?? message, 'last_message_time': DateTime.now().millisecondsSinceEpoch.toString()});
+  }
+
+  Future readMessage(String roomId, String msgId) async {
+    await firestore
+        .collection('rooms')
+        .doc(roomId)
+        .collection('messages')
+        .doc(msgId)
+        .update({'read': DateTime.now().millisecondsSinceEpoch.toString()});
   }
 }
